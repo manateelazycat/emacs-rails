@@ -27,6 +27,11 @@
 (eval-when-compile
   (require 'rails-scripts))
 
+(defcustom rails-rake-use-bundler-when-possible t
+  "t when rake should be run with 'bundle exec' whenever possible. (Gemfile present)"
+  :group 'rails
+  :type 'boolean)
+
 (defvar rails-rake:history (list))
 
 (defvar rails-rake:tasks-regexp "^rake \\([^ ]*\\).*# \\(.*\\)"
@@ -34,7 +39,7 @@
 
 (defun rails-rake:create-tasks-cache (file-name)
   "Create a cache file from rake --tasks output."
-  (let ((tasks (loop for str in (split-string (rails-cmd-proxy:shell-command-to-string "rake --tasks") "\n")
+  (let ((tasks (loop for str in (split-string (rails-cmd-proxy:shell-command-to-string (rails-rake:rake-command "--task")) "\n")
                      for task = (when (string-not-empty str)
                                   (string=~ rails-rake:tasks-regexp str $1))
                      when task collect task)))
@@ -65,7 +70,7 @@
   (interactive (rails-completing-read "What task run" (rails-rake:list-of-tasks-without-tests)
                                       'rails-rake:history nil))
   (when task
-    (rails-script:run "rake" (list task) major-mode (or mode-line-string (concat "rake " task)))))
+    (rails-script:run (rails-rake:rake-command) (list task) major-mode (or mode-line-string (concat (rails-rake:rake-command " ") task)))))
 
 (defun rails-rake:migrate (&optional version)
   "Run the db:migrate task"
@@ -131,5 +136,9 @@
 (defun rails-rake:clone-development-db-to-test-db ()
   "Clone development DB to test DB."
   (interactive) (rails-rake:task "db:test:clone"))
+
+(defun rails-rake:rake-command (&optional args)
+  (if (and rails-rake-use-bundler-when-possible (file-exists-p (rails-core:file "Gemfile")))
+      (concat "bundle exec rake " args) (concat "rake " args)))
 
 (provide 'rails-rake)

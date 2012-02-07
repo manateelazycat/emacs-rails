@@ -35,24 +35,6 @@
 
 ;; Helper functions
 
-(defun directory-files-recursive (dirname &optional base)
-  "Return a list of names of files in directory named by
-DIRNAME. If the directory contains directories these are
-traversed recursively.  The returned list of file names are
-relative to DIRNAME and only includes regular files.
-
-If BASE is provided, it is interpreted as a subdirectory to
-traverse.  This subdirectory is included the returned file
-names."
-  (apply #'append
-         (mapcar (lambda (file)
-                   (cond ((file-regular-p (concat dirname "/" file))
-                          (list (concat base file)))
-                         ((and (file-directory-p (concat dirname "/" file))
-                               (not (string-match "^\\." file)))
-                          (directory-files-recursive (concat dirname "/" file) (concat base file "/")))))
-                 (ignore-errors (directory-files dirname)))))
-
 (defmacro rails-refactoring:disclaim (name)
   `(when (interactive-p)
      (when (not (y-or-n-p (concat "Warning! " ,name " can not be undone! Are you sure you want to continue? ")))
@@ -87,7 +69,8 @@ project.  This includes all the files in the 'app', 'config',
          (mapcar (lambda (dirname)
                    (delete-if (lambda (file) (string-match "_flymake.rb" file))
                               (delete-if-not 'rails-refactoring:source-file-p
-                                             (directory-files-recursive (rails-core:file dirname) dirname))))
+                                             (mapcar (lambda (f) (concat dirname f))
+                                                     (directory-files-recursive (rails-core:file dirname))))))
                  '("app/" "config/" "lib/" "test/" "spec/"))))
 
 (defun rails-refactoring:class-files ()

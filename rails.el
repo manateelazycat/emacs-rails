@@ -43,7 +43,6 @@
 (require 'sql)
 (require 'ansi-color)
 (require 'etags)
-(require 'find-recursive)
 
 (require 'predictive-prog-mode)
 

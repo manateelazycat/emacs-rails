@@ -232,11 +232,17 @@ not exist."
 
 ;; File hierarchy functions
 
-(defun find-recursive-files (file-regexp directory)
-  "Return a list of files, found in DIRECTORY and match them to FILE-REGEXP."
-  (find-recursive-filter-out
-   find-recursive-exclude-files
-   (find-recursive-directory-relative-files directory "" file-regexp)))
+(defun directory-files-recursive (directory &optional full match nosort base)
+  "Like `directory-files' but traversed recursively."
+  (apply #'append
+         (mapcar (lambda (file)
+                   (cond ((and (file-regular-p (concat directory "/" file))
+                               (or (not match) (string-match match file)))
+                          (list (concat base file)))
+                         ((and (file-directory-p (concat directory "/" file))
+                               (not (string-match "^\\." file)))
+                          (directory-files-recursive (concat directory "/" file) full match nosort (concat base file "/")))))
+                 (ignore-errors (directory-files directory full nil nosort)))))
 
 (defun directory-name (path)
   "Return the name of a directory with a given path.

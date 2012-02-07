@@ -42,7 +42,7 @@
          (ext (if ext ext "rb"))
          (ext (concat "\\." ext "$"))
          (dir (rails-core:file dir)))
-    (setq files (find-recursive-directory-relative-files dir "" ext))
+    (setq files (directory-files-recursive dir nil ext))
     (setq files (sort files 'string<))
     (setq files (mapcar
                  #'(lambda(f)

@@ -54,41 +54,6 @@ See the variable `align-rules-list' for more details.")
 (dolist (it ruby-align-rules-list)
   (add-to-list 'align-rules-list it))
 
-;; hideshow ruby support
-
-(defun display-code-line-counts (ov)
-  (when (eq 'code (overlay-get ov 'hs))
-    (overlay-put ov 'face 'font-lock-comment-face)
-    (overlay-put ov 'display
-                 (format " ... %d lines"
-                         (count-lines (overlay-start ov)
-                                      (overlay-end ov))))))
-
-(eval-after-load "hideshow"
-  (unless 'hs-set-up-overlay
-    (setq hs-set-up-overlay 'display-code-line-counts)))
-
-(add-hook 'hs-minor-mode-hook
-          (lambda ()
-            (unless hs-set-up-overlay
-              (setq hs-set-up-overlay 'display-code-line-counts))))
-
-(defun ruby-hs-minor-mode (&optional arg)
-  (interactive)
-  (require 'hideshow)
-  (unless (assoc 'ruby-mode hs-special-modes-alist)
-    (setq
-     hs-special-modes-alist
-     (cons (list 'ruby-mode
-                 "\\(def\\|do\\)"
-                 "end"
-                 "#"
-                 (lambda (&rest args) (ruby-end-of-block))
-                 ;(lambda (&rest args) (ruby-beginning-of-defun))
-                 )
-           hs-special-modes-alist)))
-  (hs-minor-mode arg))
-
 ;; other stuff
 
 (defun ruby-newline-and-indent ()

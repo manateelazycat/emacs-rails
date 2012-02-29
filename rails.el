@@ -507,7 +507,6 @@ necessary."
           (lambda ()
             (when (rails-project:root)
               (require 'rails-ruby)
-              (ruby-hs-minor-mode t)
               (imenu-add-to-menubar "IMENU")
               (if rails-indent-and-complete
 		(local-set-key (if rails-use-another-define-key

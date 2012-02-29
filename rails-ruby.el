@@ -111,19 +111,4 @@ See the variable `align-rules-list' for more details.")
               inf-ruby-prompt-pattern "^>> "
               inf-ruby-buffer (current-buffer))))))
 
-(defun complete-ruby-method (prefix &optional maxnum)
-  (if (capital-word-p prefix)
-      (let* ((cmd "x = []; ObjectSpace.each_object(Class){|i| x << i.to_s}; x.map{|i| i.match(/^%s/) ? i.gsub(/^%s/, '') : nil }.compact.sort{|x,y| x.size <=> y.size}")
-             (cmd (if maxnum (concat cmd (format "[0...%s]" maxnum)) cmd)))
-        (el4r-ruby-eval (format cmd prefix prefix)))
-    (save-excursion
-      (goto-char (- (point) (+ 1 (length prefix))))
-      (when (and (looking-at "\\.")
-                 (capital-word-p (word-at-point))
-                 (el4r-ruby-eval (format "::%s rescue nil" (word-at-point))))
-        (let* ((cmd "%s.public_methods.map{|i| i.match(/^%s/) ? i.gsub(/^%s/, '') : nil }.compact.sort{|x,y| x.size <=> y.size}")
-               (cmd (if maxnum (concat cmd (format "[0...%s]" maxnum)) cmd)))
-          (el4r-ruby-eval (format cmd (word-at-point) prefix prefix)))))))
-
-
 (provide 'rails-ruby)

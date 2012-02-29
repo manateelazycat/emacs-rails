@@ -58,30 +58,4 @@
   ;; always indent line
   (indent-for-tab-command))
 
-
-(when (fboundp 'try-complete-abbrev)
-  (message "WARRNING: the function `try-complete-abbrev' already defined"))
-
-(defun try-complete-abbrev (old)
-  (if (abbrev-expansion-point-p)
-      (if (expand-abbrev)
-          t nil)
-    nil))
-
-(defun abbrev-expansion-point-p ()
-  "returns true if point is a place that might be expanded"
-  (if (memq (get-text-property (- (point) 1) 'face)
-            '(font-lock-string-face font-lock-comment-face font-lock-doc-face))
-      (return nil) ;; we never expand inside of string literals or comments
-    (string-not-empty (syntax-word-before-point))))
-
-(defun syntax-word-before-point ()
-  "Yields the word immediately preceding point"
-  (buffer-substring-no-properties
-   (+ (point) (save-excursion (skip-syntax-backward "w")))
-   (point)))
-
-
-(unless (find 'try-complete-abbrev hippie-expand-try-functions-list)
-  (add-to-list 'hippie-expand-try-functions-list 'try-complete-abbrev))
 (provide 'rails-compat)

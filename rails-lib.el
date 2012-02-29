@@ -259,25 +259,6 @@ the user explicit sets `rails-use-alternative-browse-url'."
       (w32-shell-execute "open" "iexplore" url)
     (browse-url url args)))
 
-;; abbrev
-;; from http://www.opensource.apple.com/darwinsource/Current/emacs-59/emacs/lisp/derived.el
-(defun merge-abbrev-tables (old new)
-  "Merge an old abbrev table into a new one.
-This function requires internal knowledge of how abbrev tables work,
-presuming that they are obarrays with the abbrev as the symbol, the expansion
-as the value of the symbol, and the hook as the function definition."
-  (when old
-    (mapatoms
-     (lambda(it)
-       (or (intern-soft (symbol-name it) new)
-           (define-abbrev new
-             (symbol-name it)
-             (symbol-value it)
-             (symbol-function it)
-             nil
-             t)))
-     old)))
-
 ;; Colorize
 
 (defun apply-colorize-to-buffer (name)

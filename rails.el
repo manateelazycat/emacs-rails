@@ -308,15 +308,10 @@ Emacs w3m browser."
 (defun rails-apply-for-buffer-type ()
  (let* ((type (rails-core:buffer-type))
         (name (substring (symbol-name type) 1))
-        (minor-mode-name (format "rails-%s-minor-mode" name))
-        (minor-mode-abbrev (concat minor-mode-name "-abbrev-table")))
+        (minor-mode-name (format "rails-%s-minor-mode" name)))
    (when (require (intern minor-mode-name) nil t) ;; load new style minor mode rails-*-minor-mode
      (when (fboundp (intern minor-mode-name))
-       (apply (intern minor-mode-name) (list t))
-       (when (boundp (intern minor-mode-abbrev))
-         (merge-abbrev-tables
-          (symbol-value (intern minor-mode-abbrev))
-          local-abbrev-table))))))
+       (apply (intern minor-mode-name) (list t))))))
 
 (defun rails-grep-project (regexp)
   "Find regexp in project."
@@ -475,7 +470,6 @@ necessary."
   nil
   " RoR"
   rails-minor-mode-map
-  (abbrev-mode -1)
   (make-local-variable 'tags-file-name)
   (make-local-variable 'rails-primary-switch-func)
   (make-local-variable 'rails-secondary-switch-func)

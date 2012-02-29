@@ -498,7 +498,6 @@ necessary."
           (lambda ()
             (when (rails-project:root)
               (require 'rails-ruby)
-              (imenu-add-to-menubar "IMENU")
               (if rails-indent-and-complete
 		(local-set-key (if rails-use-another-define-key
                                  (kbd "TAB") (kbd "<tab>"))

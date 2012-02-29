@@ -27,7 +27,6 @@
 ;;; Code:
 
 (eval-when-compile
-  (require 'snippet nil t)
   (require 'completion-ui nil t))
 
 (when (fboundp 'indent-and-complete)
@@ -38,11 +37,6 @@
   (interactive)
 
   (cond
-   ;; snippet
-   ((and (boundp 'snippet)
-         snippet)
-    (snippet-next-field))
-
    ;; completion-ui
    ((and (fboundp 'completion-overlay-at-point)
          (completion-overlay-at-point))

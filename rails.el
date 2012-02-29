@@ -36,8 +36,7 @@
 (eval-when-compile
   (require 'speedbar)
   (require 'inf-ruby)
-  (require 'ruby-mode)
-  (require 'ruby-electric))
+  (require 'ruby-mode))
 
 (require 'grep)
 (require 'sql)
@@ -156,11 +155,6 @@ Emacs w3m browser."
   "Default html template for new rails layout"
   :group 'rails
   :type 'string)
-
-(defcustom rails-enable-ruby-electric t
-  "Indicates whether ruby electric minor mode should be enabled by default for ruby files"
-  :group 'rails
-  :type 'boolean)
 
 (defcustom rails-number-of-lines-shown-when-opening-log-file 130
   "Specifies how many lines to show initially when opening a log file"
@@ -515,8 +509,6 @@ necessary."
           (lambda ()
             (when (rails-project:root)
               (require 'rails-ruby)
-              (require 'ruby-electric)
-              (ruby-electric-mode (or rails-enable-ruby-electric -1))
               (ruby-hs-minor-mode t)
               (imenu-add-to-menubar "IMENU")
               (if rails-indent-and-complete

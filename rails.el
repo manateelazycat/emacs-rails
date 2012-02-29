@@ -125,11 +125,6 @@ Emacs w3m browser."
   :group 'rails
   :type 'boolean)
 
-(defcustom rails-chm-file nil
-  "Path to CHM documentation file on Windows, or nil."
-  :group 'rails
-  :type 'string)
-
 (defcustom rails-ruby-command "ruby"
   "Ruby preferred command line invocation."
   :group 'rails
@@ -285,21 +280,17 @@ Emacs w3m browser."
   (unless item
     (setq item (read-string "Search symbol: ")))
   (if item
-      (if (and rails-chm-file
-               (file-exists-p rails-chm-file))
-          (start-process "keyhh" "*keyhh*" "keyhh.exe" "-#klink"
-                         (format "'%s'" item)  rails-chm-file)
-          (with-current-buffer (get-buffer-create "*ri*")            
-            (setq buffer-read-only nil)
-            (erase-buffer)
-            (message (concat "Please wait..."))
-            (call-process rails-ri-command nil "*ri*" t "-T" "-f" "ansi" item)
-            (ansi-color-apply-on-region (point-min) (point-max))
-            (setq buffer-read-only t)
-            (goto-char (point-min))
-            (local-set-key "q" 'quit-window)
-            (local-set-key [f1] 'rails-search-doc)
-            (display-buffer (current-buffer))))))
+      (with-current-buffer (get-buffer-create "*ri*")
+        (setq buffer-read-only nil)
+        (erase-buffer)
+        (message (concat "Please wait..."))
+        (call-process rails-ri-command nil "*ri*" t "-T" "-f" "ansi" item)
+        (ansi-color-apply-on-region (point-min) (point-max))
+        (setq buffer-read-only t)
+        (goto-char (point-min))
+        (local-set-key "q" 'quit-window)
+        (local-set-key [f1] 'rails-search-doc)
+        (display-buffer (current-buffer)))))
 
 (defun rails-create-tags()
   "Create tags file"

@@ -43,8 +43,6 @@
 (require 'ansi-color)
 (require 'etags)
 
-(require 'predictive-prog-mode)
-
 (require 'inflections)
 
 (require 'rails-compat)

@@ -27,9 +27,9 @@
 
 ;;; Code:
 
-(unless (<= 22 emacs-major-version)
+(unless (<= 23 emacs-major-version)
   (error
-   (format "emacs-rails require CVS version of Emacs (future Emacs 22), and not be running on your Emacs %s.%s"
+   (format "emacs-rails requires Emacs 24 or newer, and may not work with this Emacs %s.%s"
            emacs-major-version
            emacs-minor-version)))
 

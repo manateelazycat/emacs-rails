@@ -204,7 +204,7 @@ Emacs w3m browser."
   :group 'rails
   :type '(repeat string))
 
-(defcustom rails-grep-extensions '("builder" "erb" "haml" "liquid" "mab" "rake" "rb" "rhtml" "rjs" "rxml" "yml" "feature" "js" "html" "rtex" "prawn")
+(defcustom rails-grep-extensions '("builder" "erb" "haml" "liquid" "mab" "rake" "rb" "rhtml" "rjs" "rxml" "yml" "feature" "js" "html" "rtex" "prawn" "coffee" "less" "scss")
   "List of file extensions which grep searches."
   :group 'rails
   :type '(repeat string))

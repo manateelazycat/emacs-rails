@@ -51,7 +51,9 @@
                 ((find type '(:model :mailer :rspec-fixture))
                  (rails-core:rspec-model-file (rails-core:current-model)))
                 ((find type '(:controller :helper :view))
-                 (rails-core:rspec-controller-file (rails-core:current-controller)))
+                 (mapconcat 'identity
+                            (rails-core:rspec-controller-files (rails-core:current-controller))
+                            " "))
                 ((find type '(:rspec-model :rspec-controller :rspec-lib))
                  (buffer-file-name))
                 ((eql type :lib)

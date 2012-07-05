@@ -515,10 +515,13 @@ necessary."
                                 ("\\.mab$"     . ruby-mode)
                                 ("Rakefile$"   . ruby-mode)
                                 ("Capfile$"    . ruby-mode)
+                                ("Gemfile"     . ruby-mode)
                                 ("\\.rxml$"    . ruby-mode)
                                 ("\\.builder$" . ruby-mode)
                                 ("\\.rjs$"     . ruby-mode)
                                 ("\\.prawn$"   . ruby-mode)
+                                ("\\.scss$"    . css-mode)
+                                ("\\.rabl$"    . ruby-mode)
                                 ("\\.rhtml$"   . rhtml-mode)
                                 ("\\.erb$"     . rhtml-mode)))
 

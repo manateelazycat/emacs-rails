@@ -866,4 +866,9 @@ the Rails minor mode log."
   "Return non nil if spec directory is exist."
   (file-exists-p (rails-core:file "spec")))
 
+(defun rails-core:prepare-command (command)
+  (if (and rails-rake-use-bundler-when-possible (file-exists-p (rails-core:file "Gemfile")))
+      (concat "bundle exec " command)
+    command))
+
 (provide 'rails-core)

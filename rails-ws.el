@@ -94,7 +94,7 @@ using `rails-default-environment'."
 	 (run-hooks 'rails-ws:before-start-hook)
 	 (let* ((default-directory root)
 		(env (if env env rails-default-environment))
-		(command (rails-ws:compute-server-conmmand rails-ws:default-server-type rails-ws:port env))
+		(command (rails-ws:compute-server-command rails-ws:default-server-type rails-ws:port env))
 		(proc
 		 (rails-cmd-proxy:start-process-color rails-ruby-command
 						rails-ws:buffer-name
@@ -108,13 +108,13 @@ using `rails-default-environment'."
                             rails-ws:port)))
 	 (run-hooks 'rails-ws:after-start-hook))))))
 
-(defun rails-ws:compute-server-conmmand (server-type port env)
+(defun rails-ws:compute-server-command (server-type port env)
   (cond
    ((string= "thin" server-type)
-    (list server-type
-           (format "-p %s -e %s start"
-                   port
-                   env)))
+    (list (rails-core:prepare-command server-type)
+          (format "-p %s -e %s start"
+                  port
+                  env)))
    ((file-exists-p (rails-core:file "script/rails"))
     (list rails-ruby-command
           (format "script/rails server -p %s -e %s"

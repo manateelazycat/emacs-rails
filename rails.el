@@ -282,7 +282,6 @@ Emacs w3m browser."
         (setq buffer-read-only t)
         (goto-char (point-min))
         (local-set-key "q" 'quit-window)
-        (local-set-key [f1] 'rails-search-doc)
         (display-buffer (current-buffer)))))
 
 (defun rails-create-tags()

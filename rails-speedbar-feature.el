@@ -169,7 +169,6 @@
    '("Ruby On Rails"
      (speedbar-line-directory . rails-speedbar:line-directory)))
 
-  (define-key rails-minor-mode-map (kbd "<f11>") 'rails-speedbar:get-focus)
   (define-key-after
     (lookup-key rails-minor-mode-map [menu-bar rails])
     [speedbar] '("Toggle Speedbar" . rails-speedbar:get-focus)

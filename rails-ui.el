@@ -322,9 +322,6 @@
   ((rails-key "\C-c \C-t") 'rails-create-tags)
 
   ;; Documentation
-  ([f1]                  'rails-search-doc)
-  ((kbd "<C-f1>")        'rails-browse-api-at-point)
-  ((rails-key "<f1>")     'rails-browse-api)
   ((rails-key "/")        'rails-script:toggle-output-window)
 
   ;; Other

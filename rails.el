@@ -195,6 +195,7 @@ Emacs w3m browser."
 
 (defvar rails-adapters-alist
   '(("mysql"      . sql-mysql)
+    ("mysql2"     . sql-mysql)
     ("postgresql" . sql-postgres)
     ("sqlite3"    . sql-sqlite))
   "Sets emacs sql function for rails adapter names.")

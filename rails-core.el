@@ -678,7 +678,7 @@ If the action is nil, return all views for the controller."
           (list
            (lambda ()
              (rails-core:grep-from-file (rails-core:file "Gemfile.lock")
-                                        "^[[:space:]]+rails[[:space:]]+(\\(.*?\\))"
+                                        "^[[:space:]]+rails[[:space:]]+(\\([[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+\\))"
                                         "\\1"))
            (lambda ()
              (rails-core:grep-from-file (rails-core:file "config/environment.rb")

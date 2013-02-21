@@ -57,9 +57,9 @@
 
 ;;;;;;;;; Loading most of the mode
 
+(require 'rails-lib)
 (require 'rails-core)
 (require 'rails-ruby)
-(require 'rails-lib)
 
 (require 'rails-cmd-proxy)
 (require 'rails-navigation)

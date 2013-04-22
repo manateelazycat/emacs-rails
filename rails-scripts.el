@@ -201,8 +201,12 @@ BUFFER-MAJOR-MODE and process-sentinel SENTINEL."
 
 (defun rails-script:run-destroy (what &rest parameters)
   "Run the destroy script using WHAT and PARAMETERS."
+  (if (file-exists-p (rails-core:file "script/rails"))
+      (setq script-command "script/rails destroy %s")
+    (setq script-command "script/destroy %s"))
+
   (rails-script:run rails-ruby-command
-                    (append (list (format "script/destroy %s"  what))
+                    (append (list (format script-command  what))
                             parameters
                             rails-script:destroy-params-list)))
 
@@ -245,8 +249,12 @@ BUFFER-MAJOR-MODE and process-sentinel SENTINEL."
 
 (defun rails-script:run-generate (what &rest parameters)
   "Run the generate script using WHAT and PARAMETERS."
+  (if (file-exists-p (rails-core:file "script/rails"))
+      (setq script-command "script/rails generate %s")
+    (setq script-command "script/generate %s"))
+
   (rails-script:run rails-ruby-command
-                    (append (list (format "script/generate %s" what))
+                    (append (list (format script-command what))
                             parameters
                             rails-script:generate-params-list)))
 

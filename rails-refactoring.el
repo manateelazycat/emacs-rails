@@ -366,10 +366,10 @@ file is available."
 (require 'rails-ui)
 
 (define-keys rails-minor-mode-map
-  ((rails-key "\C-c R q") 'rails-refactoring:query-replace)
-  ((rails-key "\C-c R m") 'rails-refactoring:rename-model)
-  ((rails-key "\C-c R c") 'rails-refactoring:rename-controller)
-  ((rails-key "\C-c R l") 'rails-refactoring:rename-layout))
+  ((rails-global-key "R q") 'rails-refactoring:query-replace)
+  ((rails-global-key "R m") 'rails-refactoring:rename-model)
+  ((rails-global-key "R c") 'rails-refactoring:rename-controller)
+  ((rails-global-key "R l") 'rails-refactoring:rename-layout))
 
 
 (provide 'rails-refactoring)

@@ -206,7 +206,7 @@
   )
 
 (defcustom rails-minor-mode-local-prefix-key "\C-c ,"
-  "Key prefix for rails commands that depend on current file (controller, migratione tc)."
+  "Key prefix for rails commands that depend on current file (controller, migration etc.)."
   :group 'rails)
 
 (defmacro rails-local-key (key)

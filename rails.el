@@ -485,7 +485,7 @@ necessary."
           (lambda ()
             (when (rails-project:root)
               (require 'rails-ruby)
-              (local-set-key (rails-key "f") '(lambda()
+              (local-set-key (rails-global-key "f") '(lambda()
                                                 (interactive)
                                                 (mouse-major-mode-menu (rails-core:menu-position))))
               (local-set-key (kbd "C-:") 'ruby-toggle-string<>simbol)

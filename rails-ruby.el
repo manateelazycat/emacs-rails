@@ -107,8 +107,8 @@ See the variable `align-rules-list' for more details.")
       (when (< (rails-core:current-rails-major-version) 3)
         (make-local-variable 'inf-ruby-first-prompt-pattern)
         (make-local-variable 'inf-ruby-prompt-pattern)
-        (setq inf-ruby-first-prompt-pattern "^>> "
-              inf-ruby-prompt-pattern "^>> "
+        (setq inf-ruby-first-prompt-pattern "^>>? "
+              inf-ruby-prompt-pattern "^>>? "
               inf-ruby-buffer (current-buffer))))))
 
 (provide 'rails-ruby)

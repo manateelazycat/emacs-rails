@@ -104,11 +104,11 @@ See the variable `align-rules-list' for more details.")
     (pop-to-buffer abuf)
     (when (fboundp 'inf-ruby-mode)
       (inf-ruby-mode)
+      (setq inf-ruby-buffer (current-buffer))
       (when (< (rails-core:current-rails-major-version) 3)
         (make-local-variable 'inf-ruby-first-prompt-pattern)
         (make-local-variable 'inf-ruby-prompt-pattern)
         (setq inf-ruby-first-prompt-pattern "^>>? "
-              inf-ruby-prompt-pattern "^>>? "
-              inf-ruby-buffer (current-buffer))))))
+              inf-ruby-prompt-pattern "^>>? ")))))
 
 (provide 'rails-ruby)

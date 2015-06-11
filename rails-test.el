@@ -209,6 +209,7 @@ Used when it's determined that the output buffer needs to be shown."
 
 (defun rails-test:run-single-file (file &optional param)
   "Run test for single file FILE."
+  (interactive "f")
   (when (not (or file param))
     "Refuse to run ruby without an argument: it would never return")
   (rails-ui:reset-error-count)
@@ -239,6 +240,8 @@ Used when it's determined that the output buffer needs to be shown."
          (mailer-test (rails-core:unit-test-file mailer)))
     (rails-test:run-single-file
      (cond
+      ((string-match "test.*\\.rb" (buffer-file-name))
+       (buffer-file-name))
       ;; model
       ((and model unit-test) unit-test)
       ;; controller
@@ -247,9 +250,7 @@ Used when it's determined that the output buffer needs to be shown."
       ;; mailer
       ((and mailer mailer-test) mailer-test)
       ;; otherwise...
-      (t (if (string-match "test.*\\.rb" (buffer-file-name))
-             (buffer-file-name)
-           (error "Cannot determine which test file to run.")))))))
+      (t (error "Cannot determine which test file to run."))))))
 
 (defun rails-test:active-support-test-case-current-test ()
   (save-excursion

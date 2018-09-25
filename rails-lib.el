@@ -146,8 +146,6 @@ BlaPostfix -> Bla."
   "Join all STRINGS using a SEPARATOR."
   (mapconcat 'identity strings separator))
 
-(defalias 'string-join 'strings-join)
-
 (defun capital-word-p (word)
   "Return t if first letter of WORD is uppercased."
   (= (elt word 0)

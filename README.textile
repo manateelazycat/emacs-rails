@@ -1,3 +1,6 @@
+Because https://github.com/remvee/emacs-rails alias string-join that conflict with subr-x.el in Emacs.
+So I fork this project to fix this conflict.
+
 It is minor mode for editing "Ruby On Rails":http://rubyonrails.org/ code with "Emacs":http://www.gnu.org/software/emacs/.
 
 

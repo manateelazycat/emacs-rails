@@ -117,7 +117,7 @@ using `rails-default-environment'."
                   env)))
    (t (let ((cmdlist (append (rails-script:find-rails-command "server")
                              (list "-p" port "-e" env))))
-        (list (car cmdlist) (string-join " " (cdr cmdlist)))))))
+        (list (car cmdlist) (strings-join " " (cdr cmdlist)))))))
 
 (defun rails-ws:stop ()
   "Stop the WebServer process."
